@@ -9,14 +9,14 @@ export async function GetPosts(req, res) {
 
 }
 
-function getPostById(id) {
+function findPostById(id) {
     return posts.findIndex(post => post.id === Number(id))
 }
 
-export async function FindPost(req, res) {
+export async function getPostById(req, res) {
     try {
         const {id} = req.params
-        const postId = getPostById(id)
+        const postId = findPostById(id)
 
         return res.status(200).json(posts[postId])
 
