@@ -1,5 +1,5 @@
 import express from 'express'
-import {GetPosts} from './controllers/posts.js'
+import {FindPost, GetPosts} from './controllers/posts.js'
 
 const router = express()
 
@@ -8,5 +8,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/posts', GetPosts)
+router.get('/posts/:id', FindPost)
 
 export default router
