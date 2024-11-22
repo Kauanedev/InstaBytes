@@ -3,11 +3,20 @@ import connectToDatabase from '../config/database.js'
 
 dotenv.config();
 
-const conexao = await connectToDatabase(process.env.MONGO_DB)
-
-export async function getPostsFromDb() {
+async function getDbCollection() {
+    const conexao = await connectToDatabase(process.env.MONGO_DB)
     const db = conexao.db("imersao-instabytes")
     const collection = db.collection("posts")
 
+    return collection
+}
+
+export async function getPostsFromDb() {
+    const collection = await getDbCollection()
     return await collection.find().toArray()
+}
+
+export async function createPost(newPost) {
+    const collection = await getDbCollection()
+    return collection.insertOne(newPost)
 }
