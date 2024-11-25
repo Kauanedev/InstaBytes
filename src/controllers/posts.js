@@ -45,3 +45,28 @@ export async function ulploadImg(req, res) {
         return res.status(500).json({error: "Não foi possível criar o post."})
     }
 }
+
+export async function updatePost(req, res) {
+    const id = req.params.id
+    const {descricao, alt} = req.body
+
+    try {
+        const file = await getFileModel(id)
+        const fileType = file.split(".")[1]
+
+        const imageUrl = `http://localhost:3000/uploads/${id}.${fileType}`
+        console.log(imageUrl);
+        const post = {
+            descricao,
+            imgUrl: imageUrl,
+            alt
+        }
+        console.log(post);
+
+        const updatedPost = await updatePostModel(id, post)
+        return res.status(201).json(updatedPost)
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({error: `Não foi possível atualizar o post ${id}.`})
+    }
+}

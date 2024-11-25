@@ -21,3 +21,18 @@ export async function createPostModel(newPost) {
     const collection = await getDbCollection()
     return collection.insertOne(newPost)
 }
+
+export async function updatePostModel(id, newPost) {
+    const collection = await getDbCollection()
+    const objectId = ObjectId.createFromHexString(id)
+    return collection.updateOne({_id: new ObjectId(objectId)}, {$set: newPost})
+}
+
+export async function getFileModel(id) {
+    const collection = await getDbCollection()
+    const objectId = ObjectId.createFromHexString(id)
+    const object = await collection.findOne({_id: new ObjectId(objectId)})
+
+    return object.imgUrl
+}
+

@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import {createNewPost, getPosts, ulploadImg} from './controllers/posts.js'
+import {createNewPost, getPosts, ulploadImg, updatePost} from './controllers/posts.js'
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,5 +23,5 @@ router.get('/', (req, res) => {
 router.get('/posts', getPosts)
 router.post('/posts', createNewPost)
 router.post('/upload', upload.single("file"), ulploadImg)
-
+router.put('/upload/:id', updatePost)
 export default router
