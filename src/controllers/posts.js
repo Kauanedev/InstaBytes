@@ -53,16 +53,17 @@ export async function updatePost(req, res) {
     const fileType = file.split(".")[1]
     try {
         const imageBuffer = fs.readFileSync(`uploads/${id}.${fileType}`)
-        const descricao = await gerarDescricaoComGemini(imageBuffer)
+        const gemini = await gerarDescricaoComGemini(imageBuffer)
+        console.log(gemini);
 
         const imageUrl = `http://localhost:3000/uploads/${id}.${fileType}`
-        console.log(imageUrl);
+
         const post = {
-            descricao,
+            descricao: gemini.description,
             imgUrl: imageUrl,
-            alt: req.body.alt
+            alt: gemini.alt
         }
-        console.log(post);
+        console.log("Post atualizado:", post);
 
         const updatedPost = await updatePostModel(id, post)
         return res.status(201).json(updatedPost)
