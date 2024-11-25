@@ -1,5 +1,6 @@
 import fs from 'fs'
 import {createPostModel, getFileModel, getPostsFromDb, updatePostModel} from '../models/postsModel.js'
+import gerarDescricaoComGemini from '../services/geminiService.js'
 
 export async function getPosts(req, res) {
     try {
