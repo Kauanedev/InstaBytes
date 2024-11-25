@@ -22,5 +22,6 @@ router.get('/', (req, res) => {
 
 router.get('/posts', getPosts)
 router.post('/posts', createNewPost)
+router.post('/upload', upload.single("file"), ulploadImg)
 
 export default router
