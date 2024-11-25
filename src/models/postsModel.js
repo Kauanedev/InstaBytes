@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import connectToDatabase from '../config/database.js'
+import {ObjectId} from 'mongodb';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ export async function getPostsFromDb() {
     return await collection.find().toArray()
 }
 
-export async function createPost(newPost) {
+export async function createPostModel(newPost) {
     const collection = await getDbCollection()
     return collection.insertOne(newPost)
 }

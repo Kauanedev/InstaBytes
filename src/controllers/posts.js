@@ -1,5 +1,5 @@
-import {createPost, getPostsFromDb} from '../models/postsModel.js'
 import fs from 'fs'
+import {createPostModel, getFileModel, getPostsFromDb, updatePostModel} from '../models/postsModel.js'
 
 export async function getPosts(req, res) {
     try {
@@ -15,7 +15,7 @@ export async function getPosts(req, res) {
 export async function createNewPost(req, res) {
     try {
         const newPost = req.body
-        const post = await createPost(newPost)
+        const post = await createPostModel(newPost)
 
         return res.status(201).json(post)
     } catch (error) {
@@ -32,11 +32,12 @@ export async function ulploadImg(req, res) {
             imgUrl: req.file.originalname,
             alt
         }
-        const post = await createPost(newPost)
+        const post = await createPostModel(newPost)
 
         const fileType = req.file.mimetype.split("/")[1]
         const updateImg = `uploads/${post.insertedId}.${fileType}`
         fs.renameSync(req.file.path, updateImg)
+        console.log(`Arquivo salvo em: ${updateImg}`);
 
         return res.status(201).json(post)
     } catch (error) {
@@ -44,5 +45,3 @@ export async function ulploadImg(req, res) {
         return res.status(500).json({error: "Não foi possível criar o post."})
     }
 }
-
-
