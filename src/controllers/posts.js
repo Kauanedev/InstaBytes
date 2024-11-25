@@ -48,18 +48,18 @@ export async function ulploadImg(req, res) {
 
 export async function updatePost(req, res) {
     const id = req.params.id
-    const {descricao, alt} = req.body
-
+    const file = await getFileModel(id)
+    const fileType = file.split(".")[1]
     try {
-        const file = await getFileModel(id)
-        const fileType = file.split(".")[1]
+        const imageBuffer = fs.readFileSync(`uploads/${id}.${fileType}`)
+        const descricao = await gerarDescricaoComGemini(imageBuffer)
 
         const imageUrl = `http://localhost:3000/uploads/${id}.${fileType}`
         console.log(imageUrl);
         const post = {
             descricao,
             imgUrl: imageUrl,
-            alt
+            alt: req.body.alt
         }
         console.log(post);
 
