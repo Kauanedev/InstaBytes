@@ -1,6 +1,12 @@
 import express from 'express'
 import multer from 'multer'
 import {createNewPost, getPosts, ulploadImg, updatePost} from './controllers/posts.js'
+import * as cors from 'cors'
+
+const corsOptions = {
+    origin: "http://localhost:8000",
+    optionsSuccessStatus: 200
+}
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -10,11 +16,14 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
-
 const upload = multer({
     dest: "./uploads", storage
 })
+
+
 const router = express()
+router.use(express.json())
+router.use(cors(corsOptions))
 
 router.get('/', (req, res) => {
     res.send('Hello World')
