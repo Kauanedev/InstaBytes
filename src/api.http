@@ -10,7 +10,10 @@ Content-Type: application/json
 
 {
     "descricao": "Gato Bella",
-    "imageUrl": "http://placecats.com/bella/2000/2000",
+    "imgUrl": "http://placecats.com/bella/2000/2000",
     "alt": "Bella the catch"
 }
 
+### PUT/uploads
+PUT {{apiurl}}/upload/6745e55e1b149619f8e39bd3
+Content-Type: application/json
