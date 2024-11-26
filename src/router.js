@@ -26,7 +26,13 @@ router.use(express.json())
 router.use(cors(corsOptions))
 
 router.get('/', (req, res) => {
-    res.send('Hello World')
+    res.send(`
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 5rem;">
+         <h1>InstaLike API</h1>
+        <p>Access the github project here: <a href="https://github.com/Kauanedev/InstaBytes">GitHub</a></p>
+        <p>Add "/posts" to your route to access the api posts</p>
+    </div>
+        `)
 })
 
 router.get('/posts', getPosts)
