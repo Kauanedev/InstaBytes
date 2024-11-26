@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import {createNewPost, getPosts, ulploadImg, updatePost} from './controllers/posts.js'
-import * as cors from 'cors'
+import cors from 'cors'
 
 const corsOptions = {
     origin: "http://localhost:8000",
