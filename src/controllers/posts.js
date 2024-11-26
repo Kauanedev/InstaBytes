@@ -38,7 +38,6 @@ export async function ulploadImg(req, res) {
         const fileType = req.file.mimetype.split("/")[1]
         const updateImg = `uploads/${post.insertedId}.${fileType}`
         fs.renameSync(req.file.path, updateImg)
-        console.log(`Arquivo salvo em: ${updateImg}`);
 
         return res.status(201).json(post)
     } catch (error) {
@@ -54,16 +53,14 @@ export async function updatePost(req, res) {
     try {
         const imageBuffer = fs.readFileSync(`uploads/${id}.${fileType}`)
         const gemini = await gerarDescricaoComGemini(imageBuffer)
-        console.log(gemini);
 
-        const imageUrl = `http://localhost:3000/uploads/${id}.${fileType}`
+        const imgUrl = `http://localhost:3000/uploads/${id}.${fileType}`
 
         const post = {
             descricao: gemini.description,
-            imgUrl: imageUrl,
+            imgUrl,
             alt: gemini.alt
         }
-        console.log("Post atualizado:", post);
 
         const updatedPost = await updatePostModel(id, post)
         return res.status(201).json(updatedPost)
