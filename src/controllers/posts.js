@@ -26,6 +26,8 @@ export async function createNewPost(req, res) {
 }
 
 export async function ulploadImg(req, res) {
+    const fileType = req.file.mimetype.split("/")[1]
+    if (fileType !== "png") return res.status(500).json({error: "Não foi possível criar o post. A imagem precisa ser do tipo PNG."})
     try {
         const {descricao, alt} = req.body
         const newPost = {
@@ -35,7 +37,7 @@ export async function ulploadImg(req, res) {
         }
         const post = await createPostModel(newPost)
 
-        const fileType = req.file.mimetype.split("/")[1]
+
         const updateImg = `uploads/${post.insertedId}.${fileType}`
         fs.renameSync(req.file.path, updateImg)
 
@@ -48,9 +50,12 @@ export async function ulploadImg(req, res) {
 
 export async function updatePost(req, res) {
     const id = req.params.id
-    const file = await getFileModel(id)
-    const fileType = file.split(".")[1]
     try {
+        const file = await getFileModel(id)
+        const fileType = file.split(".")[1]
+
+        if (fileType !== "png") return res.status(500).json({error: "Não foi possível atualizar o post. A imagem precisa ser do tipo PNG."})
+
         const imageBuffer = fs.readFileSync(`uploads/${id}.${fileType}`)
         const gemini = await gerarDescricaoComGemini(imageBuffer)
 
@@ -62,8 +67,8 @@ export async function updatePost(req, res) {
             alt: gemini.alt
         }
 
-        const updatedPost = await updatePostModel(id, post)
-        return res.status(201).json(updatedPost)
+        await updatePostModel(id, post)
+        return res.status(201).json(post)
     } catch (error) {
         console.log(error.message)
         return res.status(500).json({error: `Não foi possível atualizar o post ${id}.`})
