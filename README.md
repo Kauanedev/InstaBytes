@@ -9,9 +9,9 @@
 	<img alt="Google Cloud" src = "https://img.shields.io/badge/Google%20Cloud-4285F4.svg?style=for-the-badge&logo=Google-Cloud&logoColor=white"/> 
 </p>
 
-<h1 align="center">
+<p align="center">
     <img alt="Api response" title="#Api Response" src="./assets\home.png" />
-</h1>
+</p>
 
 <h4 align="center"> 
  🤳InstaBytes📲
@@ -35,6 +35,13 @@ InstaBytes is an application developed as part of the Alura Backend Immersion, i
 
 ## ⚙️ Functionalities
 
+</p>
+
+<p align="center">
+    <img alt="Api response" title="#Api Response" src="./assets/response.png" />
+</p>
+<p align="center">
+    <img alt="Api response" title="#Api Response" src="./assets/description.png" />
 </p>
 
 - <strong> Image Upload</strong>: Allows image uploads via an API.
