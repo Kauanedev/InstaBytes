@@ -10,7 +10,7 @@
 </p>
 
 <h1 align="center">
-    <img alt="Api response" title="#Api Response" src="./assets\response.png" />
+    <img alt="Api response" title="#Api Response" src="./assets\home.png" />
 </h1>
 
 <h4 align="center"> 
@@ -38,23 +38,29 @@ InstaBytes is an application developed as part of the Alura Backend Immersion, i
 </p>
 
 - <strong> Image Upload</strong>: Allows image uploads via an API.
-- <strong> Data Storage and Retrieval</strong>: Integrates with a file system or database to store and retrieve related data.
-- <strong> Scalability</strong>: Deployed on Google Cloud Run, enabling scalability to handle varying traffic.
+- <strong>Image Description and Accessibility</strong>: Google Gemini connection to generate descriptive text and alternative text (alt) for uploaded images, enhancing accessibility and usability.
+- <strong>Retrieve All Images</strong>: Fetch all uploaded images and their metadata, such as descriptions and alt text, using the `/posts` endpoint with a GET request.
+- <strong>Update Image Details</strong>: Edit or update the description and alt text of a specific image using the `/upload/{id}` endpoint with a PUT request.
 
 <p id="run">
   
 ## 🏃‍♀️ Run the project
 </p>
 
-💡 try the deployed version: https://instabytes-601881814473.southamerica-east1.run.app
+### 🎲 Run Backend
+
+💡 try the deployed version: https://instabytes-601881814473.southamerica-east1.run.app/posts
 
 ```bash
 
 # Clone this repository:
 $ git clone git@github.com:Kauanedev/InstaBytes.git
 
-# Go to server folder:
+# Access the project folder:
 $ cd InstaBytes
+
+# Go to server folder:
+$ cd server
 
 # Install dependencies:
 $ npm install
@@ -63,6 +69,64 @@ $ npm install
 $ npm run dev
 
 # Server will start on port:3000
+
+```
+
+### 🧭 Run Frontend
+
+```bash
+
+# Clone this repository:
+$ git clone git@github.com:Kauanedev/InstaBytes.git
+
+# Access the project folder:
+$ cd InstaBytes
+
+# Go to frontend folder:
+$ cd frontend
+
+# Install dependencies:
+$ npm install
+
+# Run the app in the development mode:
+$ npm run start
+
+# Server will start on port:3000 - Open ~ http://localhost:8000 ~ to view it in your browser.
+
+```
+
+#### 🤫.env
+
+To configure the required environment variables, follow these steps:
+
+1. Create a `.env` file in the root of the frontend and server directories.
+2. Add the environment variables as shown in the examples below:
+
+##### Server:
+
+```bash
+# Port where the server will run
+PORT=3000
+
+# MongoDB database connection string
+MONGO_DB=mongodb+srv://your_user:password@cluster.mongodb.net/database_name
+
+# API key for Google Gemini integration
+GEMINI_API_KEY=your_gemini_key
+
+# Application deployment URL
+url_deploy=https://instabytes-601881814473.southamerica-east1.run.app
+
+```
+
+##### Frontend:
+
+```bash
+# API URL for frontend requests
+API_URL=https://instabytes-601881814473.southamerica-east1.run.app/posts
+
+# or using your local project URL
+API_URL=http://localhost:3000/posts
 
 ```
 
