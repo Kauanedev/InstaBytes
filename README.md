@@ -159,7 +159,7 @@ API_URL=http://localhost:3000/posts
 
 <p id="license">
 	
-## 📝 Licese
+## 📝 License
 </p>
 
 This project is under license [MIT](./LICENSE).
