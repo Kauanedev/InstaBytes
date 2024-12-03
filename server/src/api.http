@@ -1,0 +1,19 @@
+### Variables 
+@apiurl = http://localhost:3000
+
+### GET/posts
+GET {{apiurl}}/posts
+
+### POST /posts
+POST {{apiurl}}/posts
+Content-Type: application/json
+
+{
+    "descricao": "Gato Bella",
+    "imgUrl": "http://placecats.com/bella/2000/2000",
+    "alt": "Bella the catch"
+}
+
+### PUT/uploads
+PUT {{apiurl}}/upload/6745e55e1b149619f8e39bd3
+Content-Type: application/json
